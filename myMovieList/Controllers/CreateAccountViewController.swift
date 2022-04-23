@@ -31,13 +31,15 @@ class CreateAccountViewController: UIViewController {
             if let createUserError = error {
                 self.showError(userError: createUserError as NSError)
             } else {
-                if let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "Profile") as? ProfileViewController
-                {
-                    profileViewController.email = self.userEmailTextField.text!
-                    self.present(profileViewController, animated: true, completion: nil)
-                }
+                return
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let email = userEmailTextField.text!
+        let destinationVC = segue.destination as! ProfileViewController
+        destinationVC.email = email
     }
     
     func showError(userError: NSError) {

@@ -10,7 +10,6 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
-    
     @IBOutlet weak var userEmailIdTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     
@@ -31,13 +30,10 @@ class LoginViewController: UIViewController {
             if let loggedInUserError = error {
                 self.showError(userError: loggedInUserError as NSError)
             } else {
-//                let vc = TableViewController()
-//                let nav = UINavigationController(rootViewController: vc)
-//                nav.modalPresentationStyle = .fullScreen
-//                self.present(nav, animated: true)
-                let tableViewController = self.storyboard?.instantiateViewController(withIdentifier: "tableview") as? TableViewController
+                UserDefaults.standard.set(self.userEmailIdTextField.text, forKey: "email")
+                let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainpage") as? UINavigationController
 
-                self.view.window?.rootViewController = tableViewController
+                self.view.window?.rootViewController = navViewController
                 self.view.window?.makeKeyAndVisible()
             }
         }

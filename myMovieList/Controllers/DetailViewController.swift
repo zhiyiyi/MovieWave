@@ -30,6 +30,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createNavHeader()
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 240, height: 128)
@@ -94,13 +95,11 @@ class DetailViewController: UIViewController {
                 print("Empty Data")
                 return
             }
-            
             // Handle error
             if let error = error {
                 print("DataTask error: \(error.localizedDescription)")
                 return
             }
-            
             // Update UI in the main thread
             //DispatchQueue.main.async {
             if let image = UIImage(data: data) {
@@ -132,6 +131,36 @@ class DetailViewController: UIViewController {
         }.resume()
     }
     
+    func createNavHeader() {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let filename = safeEmail + "_profile_picture.png"
+        let path = "images/" + filename
+        
+        StorageManager.shared.downloadURL(for: path) { [weak self] result in
+            switch result {
+            case .success(let url):
+                self?.downloadProfile(url: url)
+            case .failure(let error):
+                print("Failed to get download url: \(error)")
+            }
+        }
+        //navigationItem.leftBarButtonItem
+    }
+    
+    func downloadProfile(url: URL) {
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+            }
+        }.resume()
+    }
 }
 
 extension DetailViewController: UICollectionViewDelegate {

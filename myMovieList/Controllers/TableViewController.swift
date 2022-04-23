@@ -22,7 +22,6 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section: section)
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,7 +39,8 @@ class TableViewController: UITableViewController {
                 let movie = viewModel.cellForRowAt(indexPath: indexPath)
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.movie = movie
-            } default:
+            }
+        default:
             preconditionFailure("Unexpected segue identifier.") }
     }
     

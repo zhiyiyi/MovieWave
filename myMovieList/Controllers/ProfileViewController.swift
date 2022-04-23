@@ -27,7 +27,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func imageTapped() {
-        // let tappedImage = tapGestureRecognizer.view as! UIImageView
         // print("Image tapped")
         presentPhotoActionSheet()
     }
@@ -42,10 +41,28 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func userClickedCreateProfile(_ sender: Any) {
-        DatabaseManager.shared.insertUser(with: MovieAppUser(firstName: firstName.text!, lastName: lastName.text!, emailAddress: email))
-        let tableViewController = self.storyboard?.instantiateViewController(withIdentifier: "tableview") as? TableViewController
-
-        self.view.window?.rootViewController = tableViewController
+        let appUser = MovieAppUser(firstName: firstName.text!, lastName: lastName.text!, emailAddress: email)
+        DatabaseManager.shared.insertUser(with: appUser, completion: { success in
+            if success {
+                // upload image
+                guard let image = self.imageView.image, let data = image.pngData() else {
+                    return
+                }
+                let filename = appUser.profilePictureFileName
+                StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
+                    switch result {
+                    case .success(let downloadUrl):
+                        UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                        print(downloadUrl)
+                    case .failure(let error):
+                        print("Storage manager error: \(error)")
+                    }
+                })
+            }
+        })
+        
+        let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainpage") as? UINavigationController
+        self.view.window?.rootViewController = navViewController
         self.view.window?.makeKeyAndVisible()
     }
     
