@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import SwiftUI
 
 class DetailViewController: UIViewController {
     
@@ -36,10 +38,22 @@ class DetailViewController: UIViewController {
         layout.itemSize = CGSize(width: 240, height: 128)
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(didTapLogout))
+        ]
+    }
+    
+    @objc func didTapLogout() {
+        do {
+            try? Auth.auth().signOut()
+            let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginpage") as? UINavigationController
+            self.view.window?.rootViewController = navViewController
+            self.view.window?.makeKeyAndVisible()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,7 +161,6 @@ class DetailViewController: UIViewController {
                 print("Failed to get download url: \(error)")
             }
         }
-        //navigationItem.leftBarButtonItem
     }
     
     func downloadProfile(url: URL) {
@@ -157,9 +170,24 @@ class DetailViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 let image = UIImage(data: data)
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+                let button = UIButton(type: .custom)
+                button.frame = CGRect(x: 0.0, y: 0.0, width: 24, height: 24)
+                button.setImage(image, for: .normal)
+                button.addTarget(self, action: #selector(self.didTapProfilePhoto), for: .touchUpInside)
+                let barButtonItem = UIBarButtonItem(customView: button)
+                let currWidth = barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 24)
+                currWidth?.isActive = true
+                let currHeight = barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 24)
+                currHeight?.isActive = true
+                self.navigationItem.rightBarButtonItems?.append(barButtonItem)
             }
         }.resume()
+    }
+    
+    @objc func didTapProfilePhoto() {
+        do {
+            performSegue(withIdentifier: "profilephoto", sender: self)
+        }
     }
 }
 
@@ -171,13 +199,11 @@ extension DetailViewController: UICollectionViewDelegate {
 
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return 2
         return posters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath) as! MyCollectionViewCell
-        // cell.configure(with: UIImage(named: "star")!)
         cell.configure(with: posters[indexPath.row])
         return cell
     }

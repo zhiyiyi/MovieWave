@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TableViewController: UITableViewController {
     var apiService = ApiService()
@@ -17,6 +18,20 @@ class TableViewController: UITableViewController {
         viewModel.fetchPopularMoviesData { [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
+        }
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(didTapLogout))
+        ]
+        createNavHeader()
+    }
+    
+    @objc func didTapLogout() {
+        do {
+            try? Auth.auth().signOut()
+            let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginpage") as? UINavigationController
+            self.view.window?.rootViewController = navViewController
+            self.view.window?.makeKeyAndVisible()
         }
     }
     
@@ -40,8 +55,11 @@ class TableViewController: UITableViewController {
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.movie = movie
             }
+        case "profilephoto1"?:
+            return
         default:
-            preconditionFailure("Unexpected segue identifier.") }
+            preconditionFailure("Unexpected segue identifier.")
+        }
     }
     
     // Delete a movie from the list
@@ -57,5 +75,49 @@ class TableViewController: UITableViewController {
             tableView.endUpdates()
         }
     }
-
+    
+    func createNavHeader() {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let filename = safeEmail + "_profile_picture.png"
+        let path = "images/" + filename
+        
+        StorageManager.shared.downloadURL(for: path) { [weak self] result in
+            switch result {
+            case .success(let url):
+                self?.downloadProfile(url: url)
+            case .failure(let error):
+                print("Failed to get download url: \(error)")
+            }
+        }
+    }
+    
+    func downloadProfile(url: URL) {
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                let button = UIButton(type: .custom)
+                button.frame = CGRect(x: 0.0, y: 0.0, width: 24, height: 24)
+                button.setImage(image, for: .normal)
+                button.addTarget(self, action: #selector(self.didTapProfilePhoto), for: .touchUpInside)
+                let barButtonItem = UIBarButtonItem(customView: button)
+                let currWidth = barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 24)
+                currWidth?.isActive = true
+                let currHeight = barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 24)
+                currHeight?.isActive = true
+                self.navigationItem.rightBarButtonItems?.append(barButtonItem)
+            }
+        }.resume()
+    }
+    
+    @objc func didTapProfilePhoto() {
+        do {
+            performSegue(withIdentifier: "profilephoto1", sender: self)
+        }
+    }
 }

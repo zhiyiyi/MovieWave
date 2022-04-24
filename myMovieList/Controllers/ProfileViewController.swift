@@ -34,9 +34,10 @@ class ProfileViewController: UIViewController {
     @IBAction func userClickedLogout(_ sender: Any) {
         do {
             try? Auth.auth().signOut()
-            self.dismiss(animated: true, completion: nil)
-        } catch {
-            showError()
+            // _ = navigationController?.popToRootViewController(animated: true)
+            let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginpage") as? UINavigationController
+            self.view.window?.rootViewController = navViewController
+            self.view.window?.makeKeyAndVisible()
         }
     }
     

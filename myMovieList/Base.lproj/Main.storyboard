@@ -104,10 +104,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Popular Movies" id="tAB-PD-xk4"/>
+                    <connections>
+                        <segue destination="2a5-tt-viD" kind="show" identifier="profilephoto1" id="By1-af-b8K"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Bb-Vj-avZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1852.1739130434785" y="119.86607142857142"/>
+            <point key="canvasLocation" x="1888" y="120"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="p3l-P3-LHh">
@@ -203,7 +206,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gvj-cF-Hyc">
                                                 <rect key="frame" x="0.0" y="480" width="384" height="61"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdI-6w-GUu">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdI-6w-GUu">
                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -220,7 +223,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4Ww-Cv-loj">
                                                 <rect key="frame" x="0.0" y="561" width="384" height="61"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWj-af-Iw5">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVIEW:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWj-af-Iw5">
                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -267,11 +270,12 @@
                         <outlet property="theMovieRate" destination="XRz-XZ-xzh" id="utn-BR-zt5"/>
                         <outlet property="theMovieTitle" destination="bjd-l5-WE9" id="l8m-md-RE5"/>
                         <outlet property="theMovieYear" destination="4VR-N2-YVk" id="Hol-Dg-251"/>
+                        <segue destination="2a5-tt-viD" kind="show" identifier="profilephoto" id="iMo-Zb-8xO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UwZ-X1-BSZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="119.86607142857142"/>
+            <point key="canvasLocation" x="2710" y="120"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J1J-cw-cX7">
@@ -525,7 +529,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jdu-Ku-aOH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hhZ-a5-71o" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginpage" automaticallyAdjustsScrollViewInsets="NO" id="hhZ-a5-71o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpd-GI-SnX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -559,6 +563,9 @@
             <point key="canvasLocation" x="942.02898550724649" y="119.86607142857142"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iMo-Zb-8xO"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="profile" width="5304" height="7952"/>
         <image name="star" width="1280" height="1217"/>
