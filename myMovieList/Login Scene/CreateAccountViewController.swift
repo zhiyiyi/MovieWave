@@ -14,10 +14,10 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var userEmailTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     
+    let db = Database.database().reference()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,16 +30,28 @@ class CreateAccountViewController: UIViewController {
             result, error in
             if let createUserError = error {
                 self.showError(userError: createUserError as NSError)
+                // & don't perform segue
             } else {
-                return
+                let userID = Auth.auth().currentUser?.uid
+                print(userID)
+//                self.db.child("users").child(userID!).setValue(["userID": userID])
+//                StorageManager.shared.uploadProfilePicture(with: UIImage(named: "profile")!, userID: userID!) { success in
+//                    if success {
+//                        DispatchQueue.main.async {
+//                            _ = self.navigationController?.popViewController(animated: true)
+//                        }
+//                    }
+//                }
+                self.performSegue(withIdentifier: "createToProfile", sender: self)
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let email = userEmailTextField.text!
-        let destinationVC = segue.destination as! ProfileViewController
-        destinationVC.email = email
+        if segue.identifier == "createToProfile" {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.currentUID = Auth.auth().currentUser!.uid
+        }
     }
     
     func showError(userError: NSError) {

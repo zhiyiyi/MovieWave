@@ -15,8 +15,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,9 +28,7 @@ class LoginViewController: UIViewController {
             if let loggedInUserError = error {
                 self.showError(userError: loggedInUserError as NSError)
             } else {
-                UserDefaults.standard.set(self.userEmailIdTextField.text, forKey: "email")
                 let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainpage") as? UINavigationController
-
                 self.view.window?.rootViewController = navViewController
                 self.view.window?.makeKeyAndVisible()
             }

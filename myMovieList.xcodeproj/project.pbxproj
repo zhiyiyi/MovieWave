@@ -12,10 +12,10 @@
 		5903FBB027F534D60040C802 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5903FBAE27F534D60040C802 /* Main.storyboard */; };
 		5903FBB227F534D70040C802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5903FBB127F534D70040C802 /* Assets.xcassets */; };
 		5903FBB527F534D70040C802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5903FBB327F534D70040C802 /* LaunchScreen.storyboard */; };
-		5903FBBF27F540D80040C802 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBBE27F540D80040C802 /* TableViewController.swift */; };
+		5903FBBF27F540D80040C802 /* PopularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBBE27F540D80040C802 /* PopularTableViewController.swift */; };
 		5903FBC127F626DF0040C802 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBC027F626DF0040C802 /* DetailViewController.swift */; };
-		5903FBC327F62F300040C802 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBC227F62F300040C802 /* MovieModel.swift */; };
-		5903FBC527F638700040C802 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBC427F638700040C802 /* MovieCell.swift */; };
+		5903FBC327F62F300040C802 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBC227F62F300040C802 /* Movie.swift */; };
+		5903FBC527F638700040C802 /* PopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5903FBC427F638700040C802 /* PopularTableViewCell.swift */; };
 		59288170280BCFE900CA3AEE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5928816F280BCFE900CA3AEE /* FirebaseAnalytics */; };
 		59288172280BCFE900CA3AEE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 59288171280BCFE900CA3AEE /* FirebaseAuth */; };
 		59288174280BCFE900CA3AEE /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 59288173280BCFE900CA3AEE /* FirebaseAuthCombine-Community */; };
@@ -26,13 +26,24 @@
 		5958AD62281386F400963DBB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5958AD61281386F400963DBB /* FirebaseStorage */; };
 		5958AD64281386F400963DBB /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 5958AD63281386F400963DBB /* FirebaseStorageCombine-Community */; };
 		5958AD6628138D9E00963DBB /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958AD6528138D9E00963DBB /* StorageManager.swift */; };
-		5958AD6A2814C08B00963DBB /* ReviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958AD692814C08B00963DBB /* ReviewDataManager.swift */; };
+		5958AD6A2814C08B00963DBB /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958AD692814C08B00963DBB /* Review.swift */; };
+		595F6B12282AD3AC0004F779 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B11282AD3AC0004F779 /* Utilities.swift */; };
+		595F6B14282C21980004F779 /* MovieAppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B13282C21980004F779 /* MovieAppUser.swift */; };
+		595F6B17282E15E00004F779 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 595F6B16282E15E00004F779 /* FirebaseDatabase */; };
+		595F6B19282E15E00004F779 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 595F6B18282E15E00004F779 /* FirebaseDatabaseSwift */; };
+		595F6B1F282EBAF00004F779 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */; };
+		595F6B21282EBCCE0004F779 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B20282EBCCE0004F779 /* ReviewViewController.swift */; };
+		595F6B23282F90E50004F779 /* NowPlayingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B22282F90E50004F779 /* NowPlayingTableViewController.swift */; };
+		595F6B25282F90FD0004F779 /* TopRatedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B24282F90FD0004F779 /* TopRatedTableViewController.swift */; };
+		595F6B27282F91380004F779 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B26282F91380004F779 /* FavoriteTableViewController.swift */; };
+		595F6B29282F91500004F779 /* NowPlayingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B28282F91500004F779 /* NowPlayingTableViewCell.swift */; };
+		595F6B2B282F91650004F779 /* TopRatedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B2A282F91650004F779 /* TopRatedTableViewCell.swift */; };
+		595F6B2D282F91760004F779 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B2C282F91760004F779 /* FavoriteTableViewCell.swift */; };
 		5960E7BD280CC38400005E28 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5960E7BC280CC38400005E28 /* CreateAccountViewController.swift */; };
 		5960E7BF280CD86600005E28 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5960E7BE280CD86600005E28 /* ProfileViewController.swift */; };
 		5960E7C2280CEFB100005E28 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5960E7C1280CEFB100005E28 /* FirebaseFirestore */; };
 		5990CB5527F7606C005DAC02 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990CB5427F7606C005DAC02 /* APIService.swift */; };
-		5990CB5727F76655005DAC02 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990CB5627F76655005DAC02 /* MovieViewModel.swift */; };
-		5993874227F8E44300A0A2D0 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5993874027F8E44300A0A2D0 /* MyCollectionViewCell.swift */; };
+		5993874227F8E44300A0A2D0 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5993874027F8E44300A0A2D0 /* DetailCollectionViewCell.swift */; };
 		5993874327F8E44300A0A2D0 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5993874127F8E44300A0A2D0 /* MyCollectionViewCell.xib */; };
 		59AF0A64280BCE9D004AFF26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59AF0A63280BCE9D004AFF26 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -45,19 +56,28 @@
 		5903FBB127F534D70040C802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5903FBB427F534D70040C802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5903FBB627F534D70040C802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5903FBBE27F540D80040C802 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		5903FBBE27F540D80040C802 /* PopularTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableViewController.swift; sourceTree = "<group>"; };
 		5903FBC027F626DF0040C802 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		5903FBC227F62F300040C802 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
-		5903FBC427F638700040C802 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		5903FBC227F62F300040C802 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		5903FBC427F638700040C802 /* PopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableViewCell.swift; sourceTree = "<group>"; };
 		59288175280BD5F300CA3AEE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5958AD5928124BEC00963DBB /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		5958AD6528138D9E00963DBB /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		5958AD692814C08B00963DBB /* ReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataManager.swift; sourceTree = "<group>"; };
+		5958AD692814C08B00963DBB /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		595F6B11282AD3AC0004F779 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		595F6B13282C21980004F779 /* MovieAppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppUser.swift; sourceTree = "<group>"; };
+		595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewTableViewCell.swift; path = "myMovieList/Login Scene/ReviewTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		595F6B20282EBCCE0004F779 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		595F6B22282F90E50004F779 /* NowPlayingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingTableViewController.swift; sourceTree = "<group>"; };
+		595F6B24282F90FD0004F779 /* TopRatedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedTableViewController.swift; sourceTree = "<group>"; };
+		595F6B26282F91380004F779 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
+		595F6B28282F91500004F779 /* NowPlayingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingTableViewCell.swift; sourceTree = "<group>"; };
+		595F6B2A282F91650004F779 /* TopRatedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedTableViewCell.swift; sourceTree = "<group>"; };
+		595F6B2C282F91760004F779 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		5960E7BC280CC38400005E28 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		5960E7BE280CD86600005E28 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5990CB5427F7606C005DAC02 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		5990CB5627F76655005DAC02 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
-		5993874027F8E44300A0A2D0 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		5993874027F8E44300A0A2D0 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		5993874127F8E44300A0A2D0 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		59AF0A63280BCE9D004AFF26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -67,12 +87,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				595F6B19282E15E00004F779 /* FirebaseDatabaseSwift in Frameworks */,
 				5958AD5F28124C8600963DBB /* FirebaseDatabaseSwift in Frameworks */,
 				5958AD5D28124C8600963DBB /* FirebaseDatabase in Frameworks */,
 				5958AD64281386F400963DBB /* FirebaseStorageCombine-Community in Frameworks */,
 				59288170280BCFE900CA3AEE /* FirebaseAnalytics in Frameworks */,
 				5960E7C2280CEFB100005E28 /* FirebaseFirestore in Frameworks */,
 				5958AD62281386F400963DBB /* FirebaseStorage in Frameworks */,
+				595F6B17282E15E00004F779 /* FirebaseDatabase in Frameworks */,
 				59288174280BCFE900CA3AEE /* FirebaseAuthCombine-Community in Frameworks */,
 				59288172280BCFE900CA3AEE /* FirebaseAuth in Frameworks */,
 			);
@@ -100,10 +122,11 @@
 		5903FBA727F534D60040C802 /* myMovieList */ = {
 			isa = PBXGroup;
 			children = (
-				5958AD672813994600963DBB /* Service */,
-				5960E7BB280CA8D100005E28 /* Controllers */,
 				5903FBA827F534D60040C802 /* AppDelegate.swift */,
 				5903FBAA27F534D60040C802 /* SceneDelegate.swift */,
+				5958AD672813994600963DBB /* Service */,
+				595F6B1C282EBA220004F779 /* Login Scene */,
+				595F6B1D282EBA460004F779 /* Movie Scene */,
 				5958AD682813996800963DBB /* Models */,
 				5903FBAE27F534D60040C802 /* Main.storyboard */,
 				5903FBB127F534D70040C802 /* Assets.xcassets */,
@@ -117,9 +140,9 @@
 		5958AD672813994600963DBB /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				595F6B11282AD3AC0004F779 /* Utilities.swift */,
 				5990CB5427F7606C005DAC02 /* APIService.swift */,
 				5958AD5928124BEC00963DBB /* DatabaseManager.swift */,
-				5958AD692814C08B00963DBB /* ReviewDataManager.swift */,
 				5958AD6528138D9E00963DBB /* StorageManager.swift */,
 			);
 			path = Service;
@@ -128,25 +151,41 @@
 		5958AD682813996800963DBB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5903FBC227F62F300040C802 /* MovieModel.swift */,
-				5990CB5627F76655005DAC02 /* MovieViewModel.swift */,
-				5903FBC427F638700040C802 /* MovieCell.swift */,
-				5993874027F8E44300A0A2D0 /* MyCollectionViewCell.swift */,
-				5993874127F8E44300A0A2D0 /* MyCollectionViewCell.xib */,
+				5903FBC227F62F300040C802 /* Movie.swift */,
+				595F6B13282C21980004F779 /* MovieAppUser.swift */,
+				5958AD692814C08B00963DBB /* Review.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5960E7BB280CA8D100005E28 /* Controllers */ = {
+		595F6B1C282EBA220004F779 /* Login Scene */ = {
 			isa = PBXGroup;
 			children = (
-				5903FBBE27F540D80040C802 /* TableViewController.swift */,
-				5903FBC027F626DF0040C802 /* DetailViewController.swift */,
 				59288175280BD5F300CA3AEE /* LoginViewController.swift */,
 				5960E7BC280CC38400005E28 /* CreateAccountViewController.swift */,
 				5960E7BE280CD86600005E28 /* ProfileViewController.swift */,
 			);
-			path = Controllers;
+			path = "Login Scene";
+			sourceTree = "<group>";
+		};
+		595F6B1D282EBA460004F779 /* Movie Scene */ = {
+			isa = PBXGroup;
+			children = (
+				5903FBBE27F540D80040C802 /* PopularTableViewController.swift */,
+				5903FBC427F638700040C802 /* PopularTableViewCell.swift */,
+				595F6B22282F90E50004F779 /* NowPlayingTableViewController.swift */,
+				595F6B28282F91500004F779 /* NowPlayingTableViewCell.swift */,
+				595F6B24282F90FD0004F779 /* TopRatedTableViewController.swift */,
+				595F6B2A282F91650004F779 /* TopRatedTableViewCell.swift */,
+				595F6B26282F91380004F779 /* FavoriteTableViewController.swift */,
+				595F6B2C282F91760004F779 /* FavoriteTableViewCell.swift */,
+				5903FBC027F626DF0040C802 /* DetailViewController.swift */,
+				5993874027F8E44300A0A2D0 /* DetailCollectionViewCell.swift */,
+				5993874127F8E44300A0A2D0 /* MyCollectionViewCell.xib */,
+				595F6B20282EBCCE0004F779 /* ReviewViewController.swift */,
+				595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */,
+			);
+			path = "Movie Scene";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +213,8 @@
 				5958AD5E28124C8600963DBB /* FirebaseDatabaseSwift */,
 				5958AD61281386F400963DBB /* FirebaseStorage */,
 				5958AD63281386F400963DBB /* FirebaseStorageCombine-Community */,
+				595F6B16282E15E00004F779 /* FirebaseDatabase */,
+				595F6B18282E15E00004F779 /* FirebaseDatabaseSwift */,
 			);
 			productName = myMovieList;
 			productReference = 5903FBA527F534D60040C802 /* myMovieList.app */;
@@ -208,6 +249,7 @@
 				5960E7C0280CEFB100005E28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5958AD5B28124C8600963DBB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5958AD60281386F400963DBB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				595F6B15282E15E00004F779 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5903FBA627F534D60040C802 /* Products */;
 			projectDirPath = "";
@@ -238,21 +280,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5903FBBF27F540D80040C802 /* TableViewController.swift in Sources */,
+				595F6B23282F90E50004F779 /* NowPlayingTableViewController.swift in Sources */,
+				595F6B2D282F91760004F779 /* FavoriteTableViewCell.swift in Sources */,
+				5903FBBF27F540D80040C802 /* PopularTableViewController.swift in Sources */,
 				5960E7BD280CC38400005E28 /* CreateAccountViewController.swift in Sources */,
 				5958AD5A28124BEC00963DBB /* DatabaseManager.swift in Sources */,
 				5958AD6628138D9E00963DBB /* StorageManager.swift in Sources */,
-				5903FBC527F638700040C802 /* MovieCell.swift in Sources */,
-				5993874227F8E44300A0A2D0 /* MyCollectionViewCell.swift in Sources */,
-				5958AD6A2814C08B00963DBB /* ReviewDataManager.swift in Sources */,
+				5903FBC527F638700040C802 /* PopularTableViewCell.swift in Sources */,
+				595F6B25282F90FD0004F779 /* TopRatedTableViewController.swift in Sources */,
+				5993874227F8E44300A0A2D0 /* DetailCollectionViewCell.swift in Sources */,
+				595F6B12282AD3AC0004F779 /* Utilities.swift in Sources */,
+				595F6B1F282EBAF00004F779 /* ReviewTableViewCell.swift in Sources */,
+				595F6B21282EBCCE0004F779 /* ReviewViewController.swift in Sources */,
+				595F6B29282F91500004F779 /* NowPlayingTableViewCell.swift in Sources */,
+				5958AD6A2814C08B00963DBB /* Review.swift in Sources */,
 				5903FBA927F534D60040C802 /* AppDelegate.swift in Sources */,
 				5903FBC127F626DF0040C802 /* DetailViewController.swift in Sources */,
+				595F6B14282C21980004F779 /* MovieAppUser.swift in Sources */,
+				595F6B2B282F91650004F779 /* TopRatedTableViewCell.swift in Sources */,
 				5960E7BF280CD86600005E28 /* ProfileViewController.swift in Sources */,
-				5990CB5727F76655005DAC02 /* MovieViewModel.swift in Sources */,
 				5990CB5527F7606C005DAC02 /* APIService.swift in Sources */,
-				5903FBC327F62F300040C802 /* MovieModel.swift in Sources */,
+				5903FBC327F62F300040C802 /* Movie.swift in Sources */,
 				59288176280BD5F300CA3AEE /* LoginViewController.swift in Sources */,
 				5903FBAB27F534D60040C802 /* SceneDelegate.swift in Sources */,
+				595F6B27282F91380004F779 /* FavoriteTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +547,14 @@
 				kind = branch;
 			};
 		};
+		595F6B15282E15E00004F779 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		5960E7C0280CEFB100005E28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -541,6 +600,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5928816E280BCFE900CA3AEE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		595F6B16282E15E00004F779 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5928816E280BCFE900CA3AEE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		595F6B18282E15E00004F779 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5928816E280BCFE900CA3AEE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
 		};
 		5960E7C1280CEFB100005E28 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

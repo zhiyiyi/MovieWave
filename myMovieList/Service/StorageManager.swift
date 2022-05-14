@@ -7,58 +7,43 @@
 
 import Foundation
 import FirebaseStorage
+import UIKit
 
 final class StorageManager {
     
     static let shared = StorageManager()
     private let storage = Storage.storage().reference()
     
-    /*
-     /images/test-t-com_profile_picture.png
-     */
-    
     // completion: a result object, success -> return a string, fail -> return an error
-    public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
+    public typealias UploadPictureCompletion = (Bool) -> Void
     public typealias DownloadURLCompletion = (Result<URL, Error>) -> Void
     
     /// Uploads picture to firebase storage and returns completion with url string to download
-    public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
-        storage.child("images/\(fileName)").putData(data, metadata: nil) { metadata, error in
+    public func uploadProfilePicture(with image: UIImage, userID: String, completion: @escaping UploadPictureCompletion) {
+        let data = image.pngData()
+        storage.child("images").child(userID).putData(data!, metadata: nil) { metadata, error in
             guard error == nil else {
-                // failed
-                print("failed to upload data to firebase for picture")
-                completion(.failure(StorageErrors.failedToUpload))
+                print("Failed to upload profile photo to Firebase")
+                completion(false)
                 return
             }
-            
-            self.storage.child("images/\(fileName)").downloadURL { url, error in
-                guard let url = url else {
-                    print("Failed to get download url")
-                    completion(.failure(StorageErrors.failedToGetDownloadUrl))
-                    return
-                }
-                let urlString = url.absoluteString
-                print("download url returned: \(urlString)")
-                completion(.success(urlString))
-
-            }
+            completion(true)
         }
     }
     
-    public enum StorageErrors: Error {
-        case failedToUpload
-        case failedToGetDownloadUrl
-    }
-    
-    public func downloadURL (for path: String, completion: @escaping DownloadURLCompletion) {
-        let reference = storage.child(path)
-        reference.downloadURL { url, error in
-            guard let url = url, error == nil else {
-                completion(.failure(StorageErrors.failedToGetDownloadUrl))
-                return
+    public func downloadProfilePicture(with userID: String, completion: @escaping (UIImage) -> Void) {
+        let ref = storage.child("images").child(userID)
+        ref.downloadURL { url, error in
+            if let error1 = error {
+                print(error1)
+                completion(UIImage(systemName: "photo.artframe")!)
+            } else {
+                if let urlData = url, let data = try? Data(contentsOf: urlData.absoluteURL) {
+                    let image = UIImage(data: data)
+                    completion(image!)
+                }
             }
             
-            completion(.success(url))
         }
     }
 }

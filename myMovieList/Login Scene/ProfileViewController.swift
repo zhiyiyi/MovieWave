@@ -9,25 +9,29 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
+    @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
-    var email: String = ""
+    var currentUID: String = ""
+    //let currentUID = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-        gesture.numberOfTouchesRequired = 1
-        gesture.numberOfTapsRequired = 1
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(gesture)
+        
+        print(currentUID)
+        StorageManager.shared.downloadProfilePicture(with: currentUID) { image in
+            self.imageView.image = image
+        }
     }
     
     @objc func imageTapped() {
-        // print("Image tapped")
         presentPhotoActionSheet()
     }
     
@@ -42,36 +46,32 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func userClickedCreateProfile(_ sender: Any) {
-        let appUser = MovieAppUser(firstName: firstName.text!, lastName: lastName.text!, emailAddress: email)
-        DatabaseManager.shared.insertUser(with: appUser, completion: { success in
-            if success {
-                // upload image
-                guard let image = self.imageView.image, let data = image.pngData() else {
-                    return
-                }
-                let filename = appUser.profilePictureFileName
-                StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
-                    switch result {
-                    case .success(let downloadUrl):
-                        UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
-                        print(downloadUrl)
-                    case .failure(let error):
-                        print("Storage manager error: \(error)")
+        if firstName.text != nil && lastName.text != nil && currentUID != "" {
+            let movieAppUser = MovieAppUser(firstname: firstName.text!, lastname: lastName.text!, username: userName.text!, userID: currentUID)
+            DatabaseManager.shared.insertUser(with: movieAppUser) { success in
+                if success { // upload image
+                    guard let image = self.imageView.image else {
+                        return
                     }
-                })
+                    StorageManager.shared.uploadProfilePicture(with: image, userID: self.currentUID) { success in
+                        if success {
+                            let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainpage") as? UINavigationController
+                            self.view.window?.rootViewController = navViewController
+                            self.view.window?.makeKeyAndVisible()
+                        }
+                    }
+                }
+                else {
+                    print("Failed to upload profile photo")
+                }
             }
-        })
-        
-        let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainpage") as? UINavigationController
-        self.view.window?.rootViewController = navViewController
-        self.view.window?.makeKeyAndVisible()
-    }
-    
-    func showError() {
-        let alert = UIAlertController(title: "Logout Error", message: "Could Not logout", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            let alert = UIAlertController(title: "Missing Information", message: "Please fill in all the information needed", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -90,7 +90,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         let vc = UIImagePickerController()
         vc.sourceType = .camera
         vc.delegate = self // need to add UINavigationControllerDelegate
-        vc.allowsEditing = true // user can crop and edit photos the have picked
+        vc.allowsEditing = true // user can crop and edit photos they have picked
         present(vc, animated: true)
     }
     
@@ -98,7 +98,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         let vc = UIImagePickerController()
         vc.sourceType = .photoLibrary
         vc.delegate = self
-        vc.allowsEditing = true // user can crop and edit photos the have picked
+        vc.allowsEditing = true
         present(vc, animated: true)
     }
     
