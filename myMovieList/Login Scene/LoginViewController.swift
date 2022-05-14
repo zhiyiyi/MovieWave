@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
             if let loggedInUserError = error {
                 self.showError(userError: loggedInUserError as NSError)
             } else {
-                let navViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainpage") as? UINavigationController
-                self.view.window?.rootViewController = navViewController
+                let tarBarViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTarBar") as? UITabBarController
+                self.view.window?.rootViewController = tarBarViewController
                 self.view.window?.makeKeyAndVisible()
             }
         }
