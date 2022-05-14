@@ -6,68 +6,81 @@
 //
 
 import Foundation
+import UIKit
 
-class ApiService {
-    private var dataTask: URLSessionDataTask?
+final class ApiService {
+    static let shared = ApiService()
     
-    func getPopularMoviesData(completion: @escaping (Result<MoviesData, Error>) -> Void) {
-        let popularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=5500afde12ee9320ce1ca032c03b6165&language=en-US&page=1"
-        
-        guard let url = URL(string: popularMoviesURL) else { return }
-        
+    func getMoviesDataFrom(with url: URL, completion: @escaping (Result<MovieList, Error>) -> Void) {
         // Create URLSession working in the background
-        dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            // Handle error
-            if let error = error {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error { // Handle error
                 completion(.failure(error))
                 print("DataTask error: \(error.localizedDescription)")
                 return
             }
-            
-            guard let response = response as? HTTPURLResponse else {
-                // Handle empty response
+            guard let response = response as? HTTPURLResponse else { // Handle empty response
                 print("Empty response")
                 return
             }
             print("Response status code: \(response.statusCode)")
-            
-            guard let data = data else {
-                // Handle empty data
+            guard let data = data else {// Handle empty data
                 print("Empty Data")
                 return
             }
-            
-            do {
-                // Parse the data
-                let decoder = JSONDecoder()
-                let jsonData = try decoder.decode(MoviesData.self, from: data)
-                
+            do {// Parse the data
+                let jsonData = try JSONDecoder().decode(MovieList.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(jsonData))
                 }
             } catch let error {
                 completion(.failure(error))
             }
-        }
-        dataTask?.resume()
+        }.resume()
+    }
+    
+    func getMovieDataFrom(url: URL, completion: @escaping (Movie) -> Void) {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            // Handle empty data
+            guard let data = data else {
+                print("Empty Data")
+                return
+            }
+            // Handle error
+            if let error = error {
+                print("DataTask error: \(error.localizedDescription)")
+                return
+            }
+            do {
+                let jsonData = try JSONDecoder().decode(Movie.self, from: data)
+                DispatchQueue.main.async {
+                    completion(jsonData)
+                }
+            } catch {
+                print("JSON Downloading Error!")
+            }
+        }.resume()
+    }
+    // Get image data
+    func getImageDataFrom(url: URL, completion: @escaping (UIImage) -> Void) {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                print("Empty Data")
+                return
+            }
+            if let error = error {
+                print("DataTask error: \(error.localizedDescription)")
+                return
+            }
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(UIImage(named: "noimage")!)
+                }
+            }
+        }.resume()
     }
 }
-
-
-
-//extension UIImageView {
-//    func downloadedFrom(url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
-//        contentMode = mode
-//        URLSession.shared.dataTask(with: url) {
-//            data, response, error in
-//            guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode = 200,
-//                  let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-//                  let data = data, error = nil,
-//                  let image = UIImage(data: data)
-//            else { return }
-//            DispatchQueue.main.async {
-//                self.image = image
-//            }
-//        }.resume()
-//    }
-//}

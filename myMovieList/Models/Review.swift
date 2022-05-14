@@ -6,16 +6,15 @@
 //
 
 import Foundation
-import FirebaseDatabase
 
-struct ReviewModel {
-    let movieId: Int
-    let emailAddress: String
-    let usernaem: String
+struct Review {
+    let movieID: Int
+    let userID: String
+    let username: String
     let likes: Int
     let dislikes: Int
-    let review: String
-    }
+    let reviewText: String
+}
 
 //class ReviewDataManager {
 //    var reviews: [String] = []
