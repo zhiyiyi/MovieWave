@@ -16,13 +16,13 @@ class PopularTableViewController: UITableViewController {
     let currentUID = Auth.auth().currentUser?.uid
     let sr = Storage.storage().reference()
 
-    @IBOutlet var movieTableView: UITableView!
+    @IBOutlet var popularTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        movieTableView.delegate = self
-        movieTableView.dataSource = self
+        popularTableView.delegate = self
+        popularTableView.dataSource = self
         
         fetchPopularMoviesData()
         createNavHeader()
@@ -35,7 +35,7 @@ class PopularTableViewController: UITableViewController {
             case .success(let movieList):
                 DispatchQueue.main.async {
                     self.movies = movieList.movies
-                    self.movieTableView.reloadData()
+                    self.popularTableView.reloadData()
                 }
             case .failure(let error):
                 print("Error processing json data: \(error)")
@@ -48,15 +48,29 @@ class PopularTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! PopularTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "popularCell", for: indexPath) as! PopularTableViewCell
         let movie = movies[indexPath.row]
         cell.setCellWithValuesOf(movie)
         return cell
     }
+    
+    // Delete a movie from the list
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // tableView.beginUpdates()
+            movies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // tableView.endUpdates()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showMovie": // If the triggered segue is the "showItem" segue
+        case "popularToDetail":
             if let indexPath = tableView.indexPathForSelectedRow {
                 let movie = movies[indexPath.row]
                 let detailViewController = segue.destination as! DetailViewController
@@ -67,20 +81,6 @@ class PopularTableViewController: UITableViewController {
             profileViewController.currentUID = currentUID!
         default:
             preconditionFailure("Unexpected segue identifier.")
-        }
-    }
-    
-    // Delete a movie from the list
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.beginUpdates()
-            movies.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.endUpdates()
         }
     }
     

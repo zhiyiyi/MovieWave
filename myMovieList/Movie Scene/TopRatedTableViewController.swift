@@ -6,84 +6,63 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
 
 class TopRatedTableViewController: UITableViewController {
+    
+    var movies: [Movie] = []
+    let topRatedMoviePath = "https://api.themoviedb.org/3/movie/top_rated?api_key=5500afde12ee9320ce1ca032c03b6165&language=en-US&page=1"
+    let currentUID = Auth.auth().currentUser?.uid
+    let sr = Storage.storage().reference()
 
+    @IBOutlet var topRatedTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        topRatedTableView.delegate = self
+        topRatedTableView.dataSource = self
+        
+        fetchTopRatedMoviesData()
+    }
+    
+    func fetchTopRatedMoviesData() {
+        guard let topRatedMovieURL = URL(string: topRatedMoviePath) else { return }
+        ApiService.shared.getMoviesDataFrom(with: topRatedMovieURL, completion: { result in
+            switch result {
+            case .success(let movieList):
+                DispatchQueue.main.async {
+                    self.movies = movieList.movies
+                    self.topRatedTableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error processing json data: \(error)")
+            }
+        })
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return movies.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "topRatedCell", for: indexPath) as! TopRatedTableViewCell
+        let item = movies[indexPath.row]
+        cell.setCellWithValuesOf(item)
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "topRatedToDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let movie = movies[indexPath.row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.movie = movie
+            }
+        }
     }
-    */
-
 }
