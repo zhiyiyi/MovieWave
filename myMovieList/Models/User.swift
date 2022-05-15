@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieAppUser {
+struct User {
     let firstname: String
     let lastname: String
     let username: String

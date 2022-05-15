@@ -11,10 +11,10 @@ class ReviewTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
+    @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var dislikesButton: UIButton!
     @IBOutlet weak var dislikesLabel: UILabel!
-    
-    // var owner: String
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +33,12 @@ class ReviewTableViewCell: UITableViewCell {
         likesLabel.text = String(likes)
         dislikesLabel.text = String(dislikes)
     }
-
-//    @IBAction func didTapLikes(_ sender: Any) {
-//    }
+    
+    func setupLikes(likes: Int) {
+        likesLabel.text = String(likes)
+    }
+    
+    func setupDislikes(dislikes: Int) {
+        dislikesLabel.text = String(dislikes)
+    }
 }

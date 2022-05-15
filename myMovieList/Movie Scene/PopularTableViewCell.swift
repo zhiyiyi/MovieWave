@@ -15,7 +15,8 @@ class PopularTableViewCell: UITableViewCell {
     @IBOutlet var movieOverview: UILabel!
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var movieRate: UILabel!
-
+    @IBOutlet weak var favoriteButton: UIButton!
+    
     func setCellWithValuesOf(_ movie: Movie) {
         movieTitle.text = movie.title
         movieYear.text = movie.releaseDate

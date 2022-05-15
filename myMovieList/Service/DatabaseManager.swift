@@ -29,8 +29,7 @@ extension DatabaseManager {
 //        }
 //    }
     
-    /// Inserts new user to database
-    public func insertUser(with user: MovieAppUser, completion: @escaping (Bool) -> Void) {
+    public func insertUser(with user: User, completion: @escaping (Bool) -> Void) {
         database.child("users").child(user.userID).setValue([
             "firstname": user.firstname,
             "lastname": user.lastname,

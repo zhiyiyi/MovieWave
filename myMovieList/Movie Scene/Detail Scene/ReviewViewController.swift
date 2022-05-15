@@ -10,13 +10,6 @@ import Firebase
 import FirebaseDatabase
 
 class ReviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-//    struct ReviewSimple {
-//        var username: String
-//        var reviewText: String
-//        var likes: Int
-//        var dislikes: Int
-//    }
     
     struct ReviewNew {
         var movieID: Int
@@ -61,22 +54,7 @@ class ReviewViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
-    
-//    @IBAction func didTaplikes(_ sender: Any) {
-//        let newlikes = Int(likesLabel.text!)! + 1
-//        likesLabel.text = String(newlikes)
-//        if case let cell as? UITableViewCell {
-//            if let indexPath = self.reviewTableView.indexPath(for: cell) {
-//                let movieID = reviews[indexPath.row].userID
-//                let userID = reviews[indexPath.row].userID
-//                db.child("reviews").child("\(movieID)").child(userID).setValue(["likes": newlikes])
-//            }
-//        }
-//    }
-    
-//    @IBAction func didTapdislikes(_ sender: Any) {
-//    }
-    
+
     @IBAction func didTapAddReview(_ sender: Any) {
         db.child("users").child(currentUID!).observeSingleEvent(of: .value) { snapshot1 in
             let dict1 = snapshot1.value as! [String: Any]
@@ -104,7 +82,33 @@ class ReviewViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewTableViewCell
         let item = reviews[indexPath.row]
         cell.setup(username: item.username, review: item.reviewText, likes: item.likes, dislikes: item.dislikes)
+        cell.likesButton.tag = indexPath.row
+        cell.likesButton.addTarget(self, action: #selector(didTapLikes(sender:)), for: .touchUpInside)
+        cell.dislikesButton.tag = indexPath.row
+        cell.dislikesButton.addTarget(self, action: #selector(didTapDislikes(sender:)), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func didTapLikes(sender: UIButton) {
+        print("You tapped like at \(sender.tag)")
+        let userID = reviews[sender.tag].userID
+        let oldLikes = reviews[sender.tag].likes
+        let newLikes = oldLikes + 1
+        print(newLikes)
+        db.child("reviews").child(String(movieID!)).child(userID).child("likes").setValue(newLikes)
+    }
+    
+    @objc func didTapDislikes(sender: UIButton) {
+        var newDislikes = 0
+        let userID = reviews[sender.tag].userID
+        let oldDislikes = reviews[sender.tag].dislikes
+        if oldDislikes > 0 {
+            newDislikes = oldDislikes - 1
+        }
+        else {
+            newDislikes = oldDislikes
+        }
+        db.child("reviews").child(String(movieID!)).child(userID).child("dislikes").setValue(newDislikes)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -130,11 +134,9 @@ class ReviewViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let deleteMovieID = reviews[indexPath.row].movieID
             let deleteUserID = reviews[indexPath.row].userID
             db.child("reviews").child("\(deleteMovieID)").child(deleteUserID).removeValue()
-            
             reviews.remove(at: indexPath.row)
-            
             tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
+            //tableView.reloadData()
         }
     }
 }
