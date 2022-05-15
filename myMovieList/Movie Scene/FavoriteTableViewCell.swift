@@ -9,6 +9,11 @@ import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var numOfReviewLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,5 +24,16 @@ class FavoriteTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func setCellWithValuesOf(_ movie: Movie, numOfReviews: Int) {
+        titleLabel.text = movie.title
+        rateLabel.text = String(format: "%.1f", movie.voteAverage!)
+        numOfReviewLabel.text = "Reviews: \(numOfReviews)"
+        guard let posterString = movie.posterPath else { return }
+        let urlString = "http://image.tmdb.org/t/p/w300" + posterString
+        let posterImageURL = URL(string: urlString)!
+        ApiService.shared.getImageDataFrom(url: posterImageURL) { image in
+            self.posterImageView.image = image
+        }
+    }
 }

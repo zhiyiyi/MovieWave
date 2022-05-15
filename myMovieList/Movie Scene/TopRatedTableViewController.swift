@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import FirebaseDatabase
 
 class TopRatedTableViewController: UITableViewController {
     
@@ -15,6 +16,8 @@ class TopRatedTableViewController: UITableViewController {
     let topRatedMoviePath = "https://api.themoviedb.org/3/movie/top_rated?api_key=5500afde12ee9320ce1ca032c03b6165&language=en-US&page=1"
     let currentUID = Auth.auth().currentUser?.uid
     let sr = Storage.storage().reference()
+    let db = Database.database().reference()
+    var isFavorite = false
 
     @IBOutlet var topRatedTableView: UITableView!
     
@@ -51,7 +54,24 @@ class TopRatedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topRatedCell", for: indexPath) as! TopRatedTableViewCell
         let item = movies[indexPath.row]
         cell.setCellWithValuesOf(item)
+        cell.favoriteButton.tag = indexPath.row
+        cell.favoriteButton.addTarget(self, action: #selector(didTapFavorite(sender:)), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func didTapFavorite(sender: UIButton) {
+        // print(sender.tag)
+        let movieID = movies[sender.tag].id
+        if isFavorite == false {
+            isFavorite = true
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            db.child("users").child(currentUID!).child("favorites").child((String(movieID!))).setValue("Yes")
+        }
+        else {
+            isFavorite = false
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            db.child("users").child(currentUID!).child("favorites").child((String(movieID!))).removeValue()
+        }
     }
     
     // MARK: - Navigation

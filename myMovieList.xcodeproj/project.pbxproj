@@ -28,7 +28,7 @@
 		5958AD6628138D9E00963DBB /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958AD6528138D9E00963DBB /* StorageManager.swift */; };
 		5958AD6A2814C08B00963DBB /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958AD692814C08B00963DBB /* Review.swift */; };
 		595F6B12282AD3AC0004F779 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B11282AD3AC0004F779 /* Utilities.swift */; };
-		595F6B14282C21980004F779 /* MovieAppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B13282C21980004F779 /* MovieAppUser.swift */; };
+		595F6B14282C21980004F779 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B13282C21980004F779 /* User.swift */; };
 		595F6B17282E15E00004F779 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 595F6B16282E15E00004F779 /* FirebaseDatabase */; };
 		595F6B19282E15E00004F779 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 595F6B18282E15E00004F779 /* FirebaseDatabaseSwift */; };
 		595F6B1F282EBAF00004F779 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */; };
@@ -65,8 +65,8 @@
 		5958AD6528138D9E00963DBB /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5958AD692814C08B00963DBB /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		595F6B11282AD3AC0004F779 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		595F6B13282C21980004F779 /* MovieAppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppUser.swift; sourceTree = "<group>"; };
-		595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewTableViewCell.swift; path = "myMovieList/Login Scene/ReviewTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		595F6B13282C21980004F779 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewTableViewCell.swift; path = "myMovieList/Movie Scene/Detail Scene/ReviewTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		595F6B20282EBCCE0004F779 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		595F6B22282F90E50004F779 /* NowPlayingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingTableViewController.swift; sourceTree = "<group>"; };
 		595F6B24282F90FD0004F779 /* TopRatedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedTableViewController.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				5903FBC227F62F300040C802 /* Movie.swift */,
-				595F6B13282C21980004F779 /* MovieAppUser.swift */,
+				595F6B13282C21980004F779 /* User.swift */,
 				5958AD692814C08B00963DBB /* Review.swift */,
 			);
 			path = Models;
@@ -179,13 +179,21 @@
 				595F6B2A282F91650004F779 /* TopRatedTableViewCell.swift */,
 				595F6B26282F91380004F779 /* FavoriteTableViewController.swift */,
 				595F6B2C282F91760004F779 /* FavoriteTableViewCell.swift */,
+				595F6B2E2830590B0004F779 /* Detail Scene */,
+			);
+			path = "Movie Scene";
+			sourceTree = "<group>";
+		};
+		595F6B2E2830590B0004F779 /* Detail Scene */ = {
+			isa = PBXGroup;
+			children = (
 				5903FBC027F626DF0040C802 /* DetailViewController.swift */,
 				5993874027F8E44300A0A2D0 /* DetailCollectionViewCell.swift */,
 				5993874127F8E44300A0A2D0 /* MyCollectionViewCell.xib */,
 				595F6B20282EBCCE0004F779 /* ReviewViewController.swift */,
 				595F6B1E282EBAF00004F779 /* ReviewTableViewCell.swift */,
 			);
-			path = "Movie Scene";
+			path = "Detail Scene";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,7 +304,7 @@
 				5958AD6A2814C08B00963DBB /* Review.swift in Sources */,
 				5903FBA927F534D60040C802 /* AppDelegate.swift in Sources */,
 				5903FBC127F626DF0040C802 /* DetailViewController.swift in Sources */,
-				595F6B14282C21980004F779 /* MovieAppUser.swift in Sources */,
+				595F6B14282C21980004F779 /* User.swift in Sources */,
 				595F6B2B282F91650004F779 /* TopRatedTableViewCell.swift in Sources */,
 				5960E7BF280CD86600005E28 /* ProfileViewController.swift in Sources */,
 				5990CB5527F7606C005DAC02 /* APIService.swift in Sources */,

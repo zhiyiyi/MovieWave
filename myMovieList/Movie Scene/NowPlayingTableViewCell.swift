@@ -14,6 +14,7 @@ class NowPlayingTableViewCell: UITableViewCell {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

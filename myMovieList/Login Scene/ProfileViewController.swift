@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func userClickedCreateProfile(_ sender: Any) {
         if firstName.text != nil && lastName.text != nil && currentUID != "" {
-            let movieAppUser = MovieAppUser(firstname: firstName.text!, lastname: lastName.text!, username: userName.text!, userID: currentUID)
+            let movieAppUser = User(firstname: firstName.text!, lastname: lastName.text!, username: userName.text!, userID: currentUID)
             DatabaseManager.shared.insertUser(with: movieAppUser) { success in
                 if success { // upload image
                     guard let image = self.imageView.image else {

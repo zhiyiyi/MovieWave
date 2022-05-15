@@ -60,3 +60,10 @@ struct MovieList: Decodable {
         case movies = "results"
     }
 }
+
+struct MovieSimple {
+    let title: String
+    let rate: Double
+    let posterPath: String?
+    let numOfReviews: Int
+}

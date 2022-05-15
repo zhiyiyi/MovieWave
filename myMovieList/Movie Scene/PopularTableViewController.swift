@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import FirebaseStorage
 
 class PopularTableViewController: UITableViewController {
@@ -14,7 +15,9 @@ class PopularTableViewController: UITableViewController {
     var movies: [Movie] = []
     let popularMoviePath = "https://api.themoviedb.org/3/movie/popular?api_key=5500afde12ee9320ce1ca032c03b6165&language=en-US&page=1"
     let currentUID = Auth.auth().currentUser?.uid
+    let db = Database.database().reference()
     let sr = Storage.storage().reference()
+    var isFavorite = false
 
     @IBOutlet var popularTableView: UITableView!
     
@@ -51,20 +54,33 @@ class PopularTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "popularCell", for: indexPath) as! PopularTableViewCell
         let movie = movies[indexPath.row]
         cell.setCellWithValuesOf(movie)
+        cell.favoriteButton.tag = indexPath.row
+        cell.favoriteButton.addTarget(self, action: #selector(didTapFavorite(sender:)), for: .touchUpInside)
         return cell
     }
     
-    // Delete a movie from the list
+    @objc func didTapFavorite(sender: UIButton) {
+        // print(sender.tag)
+        let movieID = movies[sender.tag].id
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .selected)
+            db.child("users").child(currentUID!).child("favorites").child((String(movieID!))).setValue("Yes")
+        }
+        else {
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            db.child("users").child(currentUID!).child("favorites").child((String(movieID!))).removeValue()
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // tableView.beginUpdates()
             movies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            // tableView.endUpdates()
         }
     }
     
