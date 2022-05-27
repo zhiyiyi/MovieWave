@@ -120,7 +120,6 @@
                             <outlet property="delegate" destination="39H-WR-aOE" id="1DT-he-Pn6"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Popular" id="DXW-zL-vG0"/>
                     <navigationItem key="navigationItem" title="Popular" id="tAB-PD-xk4"/>
                     <connections>
                         <outlet property="popularTableView" destination="zO6-n2-UJl" id="lxc-JY-fCj"/>
@@ -711,11 +710,11 @@
             </objects>
             <point key="canvasLocation" x="506" y="861"/>
         </scene>
-        <!--Home-->
+        <!--Popular-->
         <scene sceneID="LDP-7t-p9j">
             <objects>
                 <navigationController storyboardIdentifier="mainpage" automaticallyAdjustsScrollViewInsets="NO" id="tM2-5w-phN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="lJ2-zk-e7y"/>
+                    <tabBarItem key="tabBarItem" title="Popular" id="lJ2-zk-e7y"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="S1d-WS-3FE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RZJ-Wy-K3x">
@@ -1145,8 +1144,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iMo-Zb-8xO"/>
-        <segue reference="wAM-i2-gle"/>
+        <segue reference="By1-af-b8K"/>
+        <segue reference="CYA-WT-uFz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
