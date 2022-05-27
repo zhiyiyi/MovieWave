@@ -289,7 +289,7 @@
             </objects>
             <point key="canvasLocation" x="4528.985507246377" y="119.86607142857142"/>
         </scene>
-        <!--Review View Controller-->
+        <!--Review-->
         <scene sceneID="M9i-C5-D4j">
             <objects>
                 <viewController id="q6E-BV-JjM" customClass="ReviewViewController" customModule="myMovieList" customModuleProvider="target" sceneMemberID="viewController">
@@ -422,7 +422,7 @@
                             <constraint firstItem="Hdv-hv-5UG" firstAttribute="top" secondItem="dab-5y-z65" secondAttribute="top" id="jOV-bm-Q3p"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6tI-SW-9xz"/>
+                    <navigationItem key="navigationItem" title="Review" id="6tI-SW-9xz"/>
                     <connections>
                         <outlet property="reviewTableView" destination="Hdv-hv-5UG" id="GB6-J2-f5o"/>
                         <outlet property="reviewTextField" destination="v0Z-7T-f6d" id="bPJ-Ir-Wf2"/>
@@ -1071,6 +1071,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="92i-34-iaY"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gd4-C1-Fv7">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -1144,7 +1145,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="By1-af-b8K"/>
+        <segue reference="iMo-Zb-8xO"/>
         <segue reference="wAM-i2-gle"/>
     </inferredMetricsTieBreakers>
     <resources>
